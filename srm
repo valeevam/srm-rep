@@ -1,0 +1,21 @@
+#!/bin/bash
+rf="$HOME/RECYCLE"
+if [ ! -e "$rf"  ] 
+then 
+echo $rf NOT exists
+mkdir $rf
+echo AND now $rf created!
+else
+echo $rf Found! Founding old files in $rf. 
+find $rf -type f -mtime +6 -delete 
+fi
+
+echo "trying move $1 to recycle..."
+if [ -e $1 ]  
+then 
+tar --remove-files -zcf $rf/$1.tar.gzip  $1
+echo Done!
+else 
+echo "file $1 not exists"
+fi
+
