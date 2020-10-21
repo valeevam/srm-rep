@@ -1,6 +1,6 @@
 #!/bin/bash
 case $1 in
-        -l )
+-l )
         rf="$HOME/NOTES"
         if [ ! -e "$rf"  ]
         then
@@ -51,8 +51,23 @@ then
         -l multiline lines input mode, put CTRL+D to exit , every your line saves in NOTES
         -g <name> show a pretty goose for name, name is optional
         -f <string> find a <string> in NOTES and show you number of string and string
+        -r <string> reverse <string>
         <string> when you run notes only with <string> - notes saves <string> in NOTES"
         ;;
+-r )
+        ar="${*:2}"   
+        len=${#ar} 
+        rev=""
+        if [ $len -ne 0 ]
+        then 
+        for ((i=$len;i>=0;i--))
+        do
+              rev=$rev${ar:i:1} 
+        done
+        echo $rev
+        else echo "nothing reverse"
+fi
+;;
 * )
 
         rf="$HOME/NOTES"
@@ -67,3 +82,5 @@ then
         ;;
 
 esac
+
+read line
